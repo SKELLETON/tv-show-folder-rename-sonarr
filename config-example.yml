@@ -1,0 +1,23 @@
+sonarr_api_url: http://sonarrurl:sonarrport/api
+sonarr_api_key: sonarapikey
+new_name_components:
+- !!python/tuple
+  - title
+  - true
+- !!python/tuple
+  - ' ('
+  - false
+- !!python/tuple
+  - year
+  - true
+- !!python/tuple
+  - )
+  - false
+replace_space: true
+replacement_char: _
+log_file: rename.log
+replace_root: true
+new_root: /path/to/new/library/root
+preview: false
+use_language_in_path: true
+log_path: rename.log
