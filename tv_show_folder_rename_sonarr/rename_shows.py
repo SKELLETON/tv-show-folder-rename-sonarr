@@ -71,6 +71,12 @@ def get_new_path(config, show_path, show_details, language_profiles):
         else:
             new_name += element[0]
 
+    # Make the names windows friendly, in case i check via smb share
+    illegal_chars = ['/', '\\', ':', '?', '*']
+    for illegal_char in illegal_chars:
+        new_name = new_name.replace(illegal_char, ' ')
+    new_name = " ".join(new_name.split())
+
     # some shows already have the year in the title
     # check if year is duplicated -- will only work if the new name is supposed to end with ' (year)'
     show_name_no_year = new_name[:-7]
