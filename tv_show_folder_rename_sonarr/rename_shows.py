@@ -47,14 +47,20 @@ def run_rename(config):
         show_path = Path(show_details['path'])
         new_path = get_new_path(config, show_path, show_details, language_profiles)
         if config.get('preview') is False:
-            if not new_path.exists():
-                show_path.rename(new_path)
+            if show_path.exists():
+                if not new_path.exists():
+                    show_path.rename(new_path)
+                    show_details['path'] = str(new_path)
+                    result = connection.update_show(show_details)
+                    config.logger.log('Moved show to "' + str(new_path) + '". Sonarr update response was: ' + str(result))
+                else:
+                    config.logger.log('Path "' + str(new_path) + '" already exists. Skipping moving and updating the show',
+                                      8)
+            else:
                 show_details['path'] = str(new_path)
                 result = connection.update_show(show_details)
-                config.logger.log('Moved show to "' + str(new_path) + '". Sonarr update response was: ' + str(result))
-            else:
-                config.logger.log('Path "' + str(new_path) + '" already exists. Skipping moving and updating the show',
-                                  8)
+                config.logger.log('Path "' + str(show_path) + '" does not exist. Skipped folder move. Sonarr update response was: ' + str(result), 6)
+
         else:
             config.logger.log('Preview run. New path for show would be: ' + str(new_path))
     config.logger.log('Finished renaming the tv shows known to sonarr')
