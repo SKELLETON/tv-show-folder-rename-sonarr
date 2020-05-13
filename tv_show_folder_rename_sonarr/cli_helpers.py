@@ -1,3 +1,4 @@
+from pathlib import Path
 
 
 def read_args(args, cli_config):
@@ -9,7 +10,7 @@ def read_args(args, cli_config):
     :return: dictionary with the keys expected by the result data script
     """
     if args.config is not None:
-        cli_config.load(args.config)
+        cli_config.load(Path(args.config))
     if args.log is not None:
         cli_config.config_dict['log_file'] = args.log
     if args.url is not None:

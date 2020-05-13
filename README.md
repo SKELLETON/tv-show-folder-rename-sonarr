@@ -35,7 +35,7 @@ The new library root folder and any needed language profile sub folders have to 
 
 This program has a gui and a command line interface. 
 I have not done a lot of compatibility testing for the GUI or Windows, but it should work.
-My library move was done on linux with the CLI.
+My library move was done on linux with the CLI. You need python3 and python3-tk installed.
 
 Use `rename_shows.py --help` to get an overview of the available command line options.
 Run rename_shows.py without any arguments to get the GUI version.
